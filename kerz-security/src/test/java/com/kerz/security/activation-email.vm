@@ -1,0 +1,8 @@
+<html>
+  <body>
+    <h3>welcome</h3>
+    <p>hi ${user.email}. thanks for registering</p>
+    <p>to complete your registration and activate your account, please click the link below</p>
+    <p><a href="${activationUrl}">${activationUrl}</a></p>
+  </body>
+</html>

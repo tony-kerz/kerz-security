@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="
+ 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	">
+
+  <bean id="mailSender" class="com.kerz.mail.VelocityMailSender">
+    <property name="sender">
+      <bean class="org.springframework.mail.javamail.JavaMailSenderImpl" p:host="${mail.host}" p:port="${mail.port}"
+        p:username="${mail.username}" p:password="${mail.password}">
+        <property name="javaMailProperties">
+          <value>
+            mail.debug=true
+            mail.smtp.auth=true
+            mail.smtp.socketFactory.class=java.net.SocketFactory
+            mail.smtp.socketFactory.fallback=false
+          </value>
+        </property>
+      </bean>
+    </property>
+    <property name="velocityEngine">
+      <bean class="org.springframework.ui.velocity.VelocityEngineFactoryBean" p:resourceLoaderPath="classpath:" />
+    </property>
+    <property name="templateMap">
+      <map>
+        <entry key="activation-email" value="com/kerz/security/activation-email.vm" />
+      </map>
+    </property>
+  </bean>
+
+</beans>
